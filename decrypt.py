@@ -1,3 +1,15 @@
+'''
+Programa para decifrar os arquivos encriptados pelo programa coffee.py.
+Forma de uso vide README.md. 
+
+Mateus-n00b, Agosto 2016
+
+Versao 1.0
+
+Licenca GPL
+
+'''
+
 import os,sys,time
 
 try:
