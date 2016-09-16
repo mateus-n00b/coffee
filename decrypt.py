@@ -8,6 +8,8 @@ Versao 1.0
 
 Licenca GPL
 
+Execute:os.system('for x in *; do if grep h4ck3d <<< $x &> /dev/null; then echo $x >> /tmp/aux; fi ;done')
+
 '''
 
 import os,sys,time
@@ -25,8 +27,6 @@ PASSWORD = raw_input("pass> ")
 IV = raw_input("iv> ")
 
 bar = AES.new(PASSWORD, AES.MODE_CBC,str(IV))		
-
-#os.system('for x in *; do if grep h4ck3d <<< $x &> /dev/null; then echo $x >> /tmp/aux; fi ;done')
 
 aux = open("/tmp/aux",'r')
 cont = 0
