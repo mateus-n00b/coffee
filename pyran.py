@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-#!/usr/bin/env python
 # A ransomware written in python for educational purposes.
 # By Mateus-n00b
 # TIP: Before remove the ransomware from system run this cmd, shred <file.py>.
